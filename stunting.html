@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Prediksi Status Gizi</title>
+    <link rel="stylesheet" href="stunting.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Prediksi Status Gizi</h2>
+    <form id="formGizi">
+        <div class="form-group">
+            <label for="usia">Usia (tahun):</label>
+            <input type="number" id="usia" name="usia" required>
+        </div>
+        <div class="form-group">
+            <label for="tinggi">Tinggi (cm):</label>
+            <input type="number" id="tinggi" name="tinggi" required>
+        </div>
+        <div class="form-group">
+            <label for="berat">Berat (kg):</label>
+            <input type="number" id="berat" name="berat" required>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="prediksiGizi()">Prediksi</button>
+        </div>
+        <div class="form-group" id="hasil" style="display: none;">
+            <label>Hasil Prediksi:</label>
+            <p id="teksHasil"></p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function prediksiGizi() {
+        const usia = document.getElementById('usia').value;
+        const tinggi = document.getElementById('tinggi').value;
+        const berat = document.getElementById('berat').value;
+
+        let prediksi = 0; // Default ke stunting
+        if (usia && tinggi && berat) {
+            if (tinggi > 120 && berat > 25) { // Contoh logika sederhana untuk tinggi
+                prediksi = 2; // Tinggi
+            } else if (tinggi > 90 && berat > 14) { // Contoh logika sederhana untuk normal
+                prediksi = 1; // Normal
+            }
+        }
+
+        let teksHasil = '';
+        switch(prediksi) {
+            case 2:
+                teksHasil = 'Tinggi (2)';
+                break;
+            case 1:
+                teksHasil = 'Normal (1)';
+                break;
+            default:
+                teksHasil = 'Stunting (0)';
+                break;
+        }
+
+        document.getElementById('teksHasil').innerText = teksHasil;
+        document.getElementById('hasil').style.display = 'block';
+    }
+</script>
+
+
+</body>
+</html>
